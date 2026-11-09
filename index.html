@@ -1,14 +1,1018 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#171020">
+
     <title>FicVoice | Zona R-18</title>
+
+    <meta name="description" content="Catálogo independiente de novelas y fanfics R-18 de FicVoice.">
+
+    <style>
+        :root {
+            --fondo: #100d16;
+            --fondo-secundario: #1b1525;
+            --tarjeta: #211a2d;
+            --morado: #a879e8;
+            --morado-claro: #c8a5ff;
+            --texto: #f5efff;
+            --texto-secundario: #b9adc8;
+            --borde: #382a49;
+            --verde: #76d6a0;
+            --rojo: #ff7777;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--fondo);
+            color: var(--texto);
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+        }
+
+        body.bloqueado {
+            overflow: hidden;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .encabezado {
+            background: linear-gradient(135deg, #21152e, #130e1b);
+            border-bottom: 1px solid var(--borde);
+            padding: 25px 18px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 29px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--morado-claro);
+        }
+
+        .subtitulo {
+            color: var(--texto-secundario);
+            margin: 9px 0 0;
+            font-size: 14px;
+        }
+
+        .aviso-superior {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 13px;
+            border: 1px solid #9b5454;
+            border-radius: 20px;
+            color: #ffaaaa;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .contenedor {
+            width: min(1450px, 95%);
+            margin: 25px auto 50px;
+        }
+
+        .introduccion {
+            background: var(--fondo-secundario);
+            border: 1px solid var(--borde);
+            border-radius: 13px;
+            padding: 20px;
+            margin-bottom: 22px;
+        }
+
+        .introduccion h1 {
+            font-size: 23px;
+            margin: 0 0 10px;
+        }
+
+        .introduccion p {
+            color: var(--texto-secundario);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .advertencia {
+            color: #ffb0b0;
+            font-size: 13px;
+            margin-top: 12px !important;
+        }
+
+        .controles {
+            display: grid;
+            grid-template-columns: minmax(200px, 2fr) repeat(2, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .controles input,
+        .controles select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 9px;
+            border: 1px solid var(--borde);
+            background: var(--fondo-secundario);
+            color: var(--texto);
+            outline: none;
+        }
+
+        .controles input:focus,
+        .controles select:focus {
+            border-color: var(--morado);
+        }
+
+        .resultado {
+            color: var(--texto-secundario);
+            font-size: 14px;
+            margin: 16px 2px;
+        }
+
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 19px;
+        }
+
+        .novela {
+            min-width: 0;
+            overflow: hidden;
+            background: var(--tarjeta);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            transition: transform .2s, border-color .2s;
+        }
+
+        .novela:hover {
+            transform: translateY(-4px);
+            border-color: var(--morado);
+        }
+
+        .portada-contenedor {
+            position: relative;
+            background: #171020;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+        }
+
+        .portada {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .etiqueta-r18 {
+            position: absolute;
+            top: 9px;
+            left: 9px;
+            padding: 5px 9px;
+            border-radius: 5px;
+            background: #9b3030;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .datos-novela {
+            padding: 13px;
+        }
+
+        .titulo-novela {
+            font-size: 15px;
+            line-height: 1.4;
+            margin: 0 0 10px;
+            min-height: 42px;
+        }
+
+        .metadato {
+            color: var(--texto-secundario);
+            font-size: 12px;
+            margin: 6px 0;
+        }
+
+        .estado {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 5px;
+            background: #342747;
+            color: var(--morado-claro);
+            font-size: 11px;
+        }
+
+        .boton-detalles {
+            width: 100%;
+            margin-top: 12px;
+            padding: 10px;
+            border: 1px solid var(--morado);
+            border-radius: 7px;
+            background: transparent;
+            color: white;
+            font-weight: bold;
+        }
+
+        .boton-detalles:hover {
+            background: var(--morado);
+        }
+
+        .sin-resultados,
+        .mensaje-carga {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 45px 15px;
+            color: var(--texto-secundario);
+            background: var(--fondo-secundario);
+            border-radius: 12px;
+        }
+
+        .pie {
+            text-align: center;
+            padding: 25px 15px;
+            color: var(--texto-secundario);
+            border-top: 1px solid var(--borde);
+            font-size: 13px;
+        }
+
+        .pie a {
+            color: var(--morado-claro);
+            text-decoration: none;
+        }
+
+        /* VENTANA DE DETALLES */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, .85);
+            padding: 20px;
+            overflow-y: auto;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.visible {
+            display: flex;
+        }
+
+        .modal-contenido {
+            position: relative;
+            width: min(750px, 100%);
+            background: var(--fondo-secundario);
+            border: 1px solid var(--borde);
+            border-radius: 14px;
+            padding: 25px;
+            margin: auto;
+        }
+
+        .cerrar-modal {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            border: 0;
+            border-radius: 50%;
+            background: #382a49;
+            color: white;
+            font-size: 22px;
+        }
+
+        .detalle-superior {
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            gap: 22px;
+            margin-top: 15px;
+        }
+
+        .detalle-portada {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .detalle-titulo {
+            font-size: 21px;
+            line-height: 1.4;
+            margin: 0 35px 12px 0;
+        }
+
+        .detalle-sinopsis {
+            color: var(--texto-secundario);
+            line-height: 1.65;
+            white-space: pre-line;
+            margin-top: 22px;
+        }
+
+        .enlace-patreon {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 12px 20px;
+            background: #a84c60;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* ADVERTENCIA DE EDAD */
+
+        .pantalla-edad {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background:
+                radial-gradient(circle at center, #33203f 0%, #130d1b 65%);
+        }
+
+        .caja-edad {
+            width: min(480px, 100%);
+            padding: 32px 25px;
+            text-align: center;
+            border: 1px solid #65427d;
+            border-radius: 16px;
+            background: #1b1425;
+            box-shadow: 0 15px 60px rgba(0, 0, 0, .5);
+        }
+
+        .simbolo-edad {
+            font-size: 55px;
+            font-weight: bold;
+            color: #ff7777;
+            margin-bottom: 12px;
+        }
+
+        .caja-edad h1 {
+            font-size: 24px;
+            margin: 0 0 15px;
+        }
+
+        .caja-edad p {
+            color: var(--texto-secundario);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .botones-edad {
+            display: grid;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .boton-edad {
+            padding: 13px;
+            border: 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .boton-entrar {
+            background: var(--morado);
+            color: white;
+        }
+
+        .boton-salir {
+            background: #352a40;
+            color: white;
+        }
+
+        @media (max-width: 1000px) {
+            .catalogo {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            .catalogo {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 11px;
+            }
+
+            .controles {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .controles input {
+                grid-column: 1 / -1;
+            }
+
+            .datos-novela {
+                padding: 9px;
+            }
+
+            .titulo-novela {
+                font-size: 13px;
+            }
+
+            .detalle-superior {
+                grid-template-columns: 110px 1fr;
+                gap: 13px;
+            }
+
+            .modal-contenido {
+                padding: 17px;
+            }
+
+            .detalle-titulo {
+                font-size: 17px;
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>FicVoice | Zona R-18</h1>
-    <p>Catálogo independiente de contenido para adultos.</p>
-    <p>Estamos preparando esta sección...</p>
+
+<body class="bloqueado">
+
+    <!-- ADVERTENCIA DE EDAD -->
+
+    <section class="pantalla-edad" id="pantallaEdad">
+        <div class="caja-edad">
+
+            <div class="simbolo-edad">18+</div>
+
+            <h1>Zona R-18 de FicVoice</h1>
+
+            <p>
+                Estás ingresando a una sección que contiene novelas
+                y fanfics destinados exclusivamente a personas adultas.
+            </p>
+
+            <p>
+                Al continuar, confirmas que tienes 18 años o más
+                y que deseas acceder voluntariamente a este contenido.
+            </p>
+
+            <p class="advertencia">
+                Si eres menor de edad, abandona esta sección.
+            </p>
+
+            <div class="botones-edad">
+                <button
+                    class="boton-edad boton-entrar"
+                    id="confirmarEdad"
+                    type="button">
+                    Tengo 18 años o más. Entrar
+                </button>
+
+                <button
+                    class="boton-edad boton-salir"
+                    id="salirEdad"
+                    type="button">
+                    Soy menor de 18 años. Salir
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ENCABEZADO -->
+
+    <header class="encabezado">
+
+        <div class="logo">
+            Fic<span>Voice</span>
+        </div>
+
+        <p class="subtitulo">
+            Catálogo independiente de novelas y fanfics R-18
+        </p>
+
+        <div class="aviso-superior">
+            CONTENIDO EXCLUSIVO PARA ADULTOS
+        </div>
+
+    </header>
+
+
+    <!-- CATALOGO -->
+
+    <main class="contenedor">
+
+        <section class="introduccion">
+
+            <h1>Zona R-18</h1>
+
+            <p>
+                Explora nuestro catálogo de novelas y fanfics
+                para adultos. Selecciona una obra para consultar
+                su sinopsis y acceder a su publicación en Patreon.
+            </p>
+
+            <p class="advertencia">
+                Este catálogo es independiente del catálogo general
+                de FicVoice y no contiene anuncios publicitarios.
+            </p>
+
+        </section>
+
+
+        <section class="controles">
+
+            <input
+                type="search"
+                id="busqueda"
+                placeholder="Buscar novela..."
+                autocomplete="off">
+
+            <select id="filtroEstado">
+                <option value="">Todos los estados</option>
+            </select>
+
+            <select id="filtroUbicacion">
+                <option value="">Todas las ubicaciones</option>
+            </select>
+
+        </section>
+
+
+        <p class="resultado" id="contador">
+            Cargando catálogo...
+        </p>
+
+
+        <section class="catalogo" id="catalogo">
+
+            <div class="mensaje-carga">
+                Cargando novelas...
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- DETALLES -->
+
+    <section class="modal" id="modalDetalles">
+
+        <div class="modal-contenido">
+
+            <button
+                class="cerrar-modal"
+                id="cerrarModal"
+                type="button"
+                aria-label="Cerrar">
+                ×
+            </button>
+
+            <div id="contenidoModal"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PIE -->
+
+    <footer class="pie">
+
+        <p>
+            FicVoice | Zona R-18
+        </p>
+
+        <p>
+            <a href="https://ficvoice-publico.pages.dev/">
+                Volver al catálogo general
+            </a>
+        </p>
+
+        <p>
+            Contenido exclusivo para adultos.
+        </p>
+
+    </footer>
+
+
+    <script>
+        "use strict";
+
+        const URL_CATALOGO = "/data/catalogo.json";
+
+        const catalogo = document.getElementById("catalogo");
+        const busqueda = document.getElementById("busqueda");
+        const filtroEstado = document.getElementById("filtroEstado");
+        const filtroUbicacion = document.getElementById("filtroUbicacion");
+        const contador = document.getElementById("contador");
+
+        const pantallaEdad = document.getElementById("pantallaEdad");
+        const modalDetalles = document.getElementById("modalDetalles");
+        const contenidoModal = document.getElementById("contenidoModal");
+
+        let novelas = [];
+
+
+        // ==============================================
+        // CONFIRMACION DE EDAD
+        // ==============================================
+
+        function comprobarEdad() {
+
+            if (sessionStorage.getItem("ficvoice_r18_autorizado") === "si") {
+                pantallaEdad.style.display = "none";
+                document.body.classList.remove("bloqueado");
+            }
+
+        }
+
+        document.getElementById("confirmarEdad").addEventListener("click", () => {
+
+            sessionStorage.setItem("ficvoice_r18_autorizado", "si");
+
+            pantallaEdad.style.display = "none";
+            document.body.classList.remove("bloqueado");
+
+        });
+
+        document.getElementById("salirEdad").addEventListener("click", () => {
+
+            window.location.href = "https://ficvoice-publico.pages.dev/";
+
+        });
+
+        comprobarEdad();
+
+
+        // ==============================================
+        // CARGAR CATALOGO
+        // ==============================================
+
+        async function cargarCatalogo() {
+
+            try {
+
+                const respuesta = await fetch(URL_CATALOGO, {
+                    cache: "no-store"
+                });
+
+                if (!respuesta.ok) {
+                    throw new Error("No se pudo descargar el catálogo.");
+                }
+
+                const datos = await respuesta.json();
+
+                if (!Array.isArray(datos)) {
+                    throw new Error("El formato del catálogo no es válido.");
+                }
+
+                novelas = datos.filter(novela =>
+                    String(novela.contenido || "")
+                        .toUpperCase()
+                        .replace(/-/g, "")
+                        .trim() === "R18"
+                );
+
+                cargarFiltros();
+                mostrarNovelas();
+
+            } catch (error) {
+
+                console.error(error);
+
+                catalogo.replaceChildren();
+
+                const mensaje = document.createElement("div");
+                mensaje.className = "sin-resultados";
+                mensaje.textContent =
+                    "No se pudo cargar el catálogo. Inténtalo nuevamente más tarde.";
+
+                catalogo.appendChild(mensaje);
+
+                contador.textContent = "Error al cargar el catálogo.";
+
+            }
+
+        }
+
+
+        // ==============================================
+        // CREAR FILTROS AUTOMATICAMENTE
+        // ==============================================
+
+        function cargarFiltros() {
+
+            const estados = [...new Set(
+                novelas.map(n => n.estado).filter(Boolean)
+            )].sort((a, b) => a.localeCompare(b, "es"));
+
+            const ubicaciones = [...new Set(
+                novelas.map(n => n.ubicacion).filter(Boolean)
+            )].sort((a, b) => a.localeCompare(b, "es"));
+
+            for (const estado of estados) {
+
+                const opcion = document.createElement("option");
+                opcion.value = estado;
+                opcion.textContent = estado;
+
+                filtroEstado.appendChild(opcion);
+
+            }
+
+            for (const ubicacion of ubicaciones) {
+
+                const opcion = document.createElement("option");
+                opcion.value = ubicacion;
+                opcion.textContent = ubicacion;
+
+                filtroUbicacion.appendChild(opcion);
+
+            }
+
+        }
+
+
+        // ==============================================
+        // MOSTRAR NOVELAS
+        // ==============================================
+
+        function mostrarNovelas() {
+
+            const texto = busqueda.value.trim().toLocaleLowerCase("es");
+
+            const estadoSeleccionado = filtroEstado.value;
+            const ubicacionSeleccionada = filtroUbicacion.value;
+
+            const filtradas = novelas.filter(novela => {
+
+                const nombre = String(novela.nombre || "")
+                    .toLocaleLowerCase("es");
+
+                const codigo = String(novela.codigo || "")
+                    .toLocaleLowerCase("es");
+
+                const coincideBusqueda =
+                    nombre.includes(texto) || codigo.includes(texto);
+
+                const coincideEstado =
+                    !estadoSeleccionado || novela.estado === estadoSeleccionado;
+
+                const coincideUbicacion =
+                    !ubicacionSeleccionada ||
+                    novela.ubicacion === ubicacionSeleccionada;
+
+                return coincideBusqueda &&
+                    coincideEstado &&
+                    coincideUbicacion;
+
+            });
+
+            contador.textContent =
+                `Mostrando ${filtradas.length} de ${novelas.length} novelas.`;
+
+            catalogo.replaceChildren();
+
+            if (filtradas.length === 0) {
+
+                const mensaje = document.createElement("div");
+                mensaje.className = "sin-resultados";
+                mensaje.textContent =
+                    "No se encontraron novelas con esos criterios.";
+
+                catalogo.appendChild(mensaje);
+                return;
+
+            }
+
+            for (const novela of filtradas) {
+
+                const tarjeta = document.createElement("article");
+                tarjeta.className = "novela";
+
+                const portadaContenedor = document.createElement("div");
+                portadaContenedor.className = "portada-contenedor";
+
+                const portada = document.createElement("img");
+                portada.className = "portada";
+                portada.src = novela.portada;
+                portada.alt = novela.nombre || "Portada de novela";
+                portada.loading = "lazy";
+
+                portada.onerror = () => {
+                    portada.onerror = null;
+                    portada.removeAttribute("src");
+                    portada.alt = "Portada no disponible";
+                };
+
+                const etiqueta = document.createElement("span");
+                etiqueta.className = "etiqueta-r18";
+                etiqueta.textContent = "R-18";
+
+                portadaContenedor.append(portada, etiqueta);
+
+                const datos = document.createElement("div");
+                datos.className = "datos-novela";
+
+                const titulo = document.createElement("h2");
+                titulo.className = "titulo-novela";
+                titulo.textContent = novela.nombre || "Sin título";
+
+                const estado = document.createElement("span");
+                estado.className = "estado";
+                estado.textContent = novela.estado || "Sin estado";
+
+                const ubicacion = document.createElement("p");
+                ubicacion.className = "metadato";
+                ubicacion.textContent =
+                    "Ubicación: " + (novela.ubicacion || "No especificada");
+
+                const codigo = document.createElement("p");
+                codigo.className = "metadato";
+                codigo.textContent = "Código: " + (novela.codigo || "");
+
+                const boton = document.createElement("button");
+                boton.className = "boton-detalles";
+                boton.type = "button";
+                boton.textContent = "Ver detalles";
+
+                boton.addEventListener("click", () => {
+                    abrirDetalles(novela);
+                });
+
+                datos.append(
+                    titulo,
+                    estado,
+                    ubicacion,
+                    codigo,
+                    boton
+                );
+
+                tarjeta.append(portadaContenedor, datos);
+
+                catalogo.appendChild(tarjeta);
+
+            }
+
+        }
+
+
+        // ==============================================
+        // DETALLES DE NOVELA
+        // ==============================================
+
+        function abrirDetalles(novela) {
+
+            contenidoModal.replaceChildren();
+
+            const superior = document.createElement("div");
+            superior.className = "detalle-superior";
+
+            const portada = document.createElement("img");
+            portada.className = "detalle-portada";
+            portada.src = novela.portada;
+            portada.alt = novela.nombre || "Portada de novela";
+
+            const informacion = document.createElement("div");
+
+            const titulo = document.createElement("h2");
+            titulo.className = "detalle-titulo";
+            titulo.textContent = novela.nombre || "Sin título";
+
+            const codigo = document.createElement("p");
+            codigo.className = "metadato";
+            codigo.textContent = "Código: " + (novela.codigo || "");
+
+            const estado = document.createElement("p");
+            estado.className = "metadato";
+            estado.textContent = "Estado: " + (novela.estado || "No especificado");
+
+            const ubicacion = document.createElement("p");
+            ubicacion.className = "metadato";
+            ubicacion.textContent =
+                "Ubicación: " + (novela.ubicacion || "No especificada");
+
+            informacion.append(
+                titulo,
+                codigo,
+                estado,
+                ubicacion
+            );
+
+            superior.append(portada, informacion);
+
+            const tituloSinopsis = document.createElement("h3");
+            tituloSinopsis.textContent = "Sinopsis";
+
+            const sinopsis = document.createElement("p");
+            sinopsis.className = "detalle-sinopsis";
+            sinopsis.textContent =
+                novela.sinopsis || "No hay sinopsis disponible.";
+
+            contenidoModal.append(
+                superior,
+                tituloSinopsis,
+                sinopsis
+            );
+
+            const enlaces = Array.isArray(novela.enlaces)
+                ? novela.enlaces
+                : [];
+
+            for (const enlace of enlaces) {
+
+                if (!enlace.url || !enlace.texto) {
+                    continue;
+                }
+
+                const url = String(enlace.url);
+
+                if (url !== "https://www.patreon.com/FicVoice") {
+                    continue;
+                }
+
+                const botonPatreon = document.createElement("a");
+
+                botonPatreon.className = "enlace-patreon";
+                botonPatreon.href = url;
+                botonPatreon.target = "_blank";
+                botonPatreon.rel = "noopener noreferrer";
+                botonPatreon.textContent = enlace.texto;
+
+                contenidoModal.appendChild(botonPatreon);
+
+            }
+
+            modalDetalles.classList.add("visible");
+            document.body.classList.add("bloqueado");
+
+        }
+
+
+        // ==============================================
+        // CERRAR DETALLES
+        // ==============================================
+
+        function cerrarDetalles() {
+
+            modalDetalles.classList.remove("visible");
+
+            if (pantallaEdad.style.display === "none") {
+                document.body.classList.remove("bloqueado");
+            }
+
+        }
+
+        document.getElementById("cerrarModal")
+            .addEventListener("click", cerrarDetalles);
+
+        modalDetalles.addEventListener("click", evento => {
+
+            if (evento.target === modalDetalles) {
+                cerrarDetalles();
+            }
+
+        });
+
+        document.addEventListener("keydown", evento => {
+
+            if (evento.key === "Escape") {
+                cerrarDetalles();
+            }
+
+        });
+
+
+        // ==============================================
+        // EVENTOS DE BUSQUEDA Y FILTROS
+        // ==============================================
+
+        busqueda.addEventListener("input", mostrarNovelas);
+        filtroEstado.addEventListener("change", mostrarNovelas);
+        filtroUbicacion.addEventListener("change", mostrarNovelas);
+
+
+        // ==============================================
+        // INICIO
+        // ==============================================
+
+        cargarCatalogo();
+
+    </script>
+
 </body>
 </html>
