@@ -990,5 +990,21 @@
         "url": "https://www.patreon.com/FicVoice"
       }
     ]
+  },
+  {
+    "codigo": "Novela_00385",
+    "nombre": "vvvvvvvvv",
+    "estado": "Completo",
+    "contenido": "R18",
+    "ubicacion": "Patreon",
+    "disponibilidad": "Patreon",
+    "portada": "/portadas/Novela_00385.jpg",
+    "sinopsis": "xxxxxxx",
+    "enlaces": [
+      {
+        "texto": "Ver en Patreon",
+        "url": "https://www.patreon.com/FicVoice"
+      }
+    ]
   }
 ]
